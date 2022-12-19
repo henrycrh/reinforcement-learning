@@ -8,7 +8,7 @@ class Player:
         self.inventory = Inventory()
         self.preferences = [Preference()] * 10
 
-    def get_state(self):
+    def as_state(self):
         pass
 
 

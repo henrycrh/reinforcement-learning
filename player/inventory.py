@@ -8,3 +8,6 @@ class Inventory:
     
     def remove_good(self, item, count):
         self.items[item] -= min(self.items[item], count)
+
+    def as_state(self):
+        pass

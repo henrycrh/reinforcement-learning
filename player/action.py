@@ -15,3 +15,6 @@ class Action:
 
     def use_good(self, item, count):
         self.use_goods[item] = count
+
+    def from_state(self):
+        pass
