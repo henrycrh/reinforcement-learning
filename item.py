@@ -32,7 +32,7 @@ class Good(MutableItem):
     def use(self, quantity):
         super().use(quantity)
         for i in range(quantity):
-            self.player.QoL += self.preference.get()
+            self.player.qol += self.preference.get()
             self.preference.last_use = 0
         
     def tick(self):
