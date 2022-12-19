@@ -10,7 +10,7 @@ class MutableItem(BaseItem):
 
     def __init__(self, index, description, quantity, player, world):
         super().__init__(index, description)
-        self.quantity
+        self.quantity = quantity
         self.player = player
         self.world = world
         
