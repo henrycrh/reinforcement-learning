@@ -1,5 +1,4 @@
-from classes import Player, Weights, Inventory, Market, State, World, Action, Item, Preference
-
+from world import World
 
 world = World()
 for i in range(100):
