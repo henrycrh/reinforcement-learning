@@ -1,6 +1,7 @@
 from ..market.listing import Listing
 
 
+# TODO: when we're ready for hardcoded agent
 class Action:
     def __init__(self, items):
         self.list_sell = [Listing(0, 0)] * len(items)

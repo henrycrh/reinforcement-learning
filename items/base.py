@@ -1,32 +1,18 @@
-# class BaseItem:
-#     def __init__(self, index, description):
-#         self.index = index
-#         self.description = description
-
-
-# class ImmutableItem(BaseItem):
-#     pass
-
-class ItemBase:
-    def __init__(self):
-        self.index = index
-    def mutable_copy(self):
-        pass
-
-
 class Item:
-    def __init__(self, quantity, player):
-        self.quantity = quantity
+    def __init__(self, index, player, world, quantity):
+        self.index = index
         self.player = player
+        self.world = world
+        self.quantity = quantity
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}(index={self.index}, quantity={self.quantity})'
 
     def remove(self, quantity):
-        self.quantity -= quantity
+        self.quantity -= min(self.quantity, quantity)
 
     def add(self, quantity):
         self.quantity += quantity
-
-    def set_owner(self, owner):
-        self.player = owner
 
     def tick(self):
         pass

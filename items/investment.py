@@ -1,19 +1,18 @@
-from base import Item
+from items.base import Item
 
 
 class Investment(Item):
-    def __init__(self, quantity, player, trigger_rate):
-        super().__init__(quantity, player)
+    def __init__(self, index, player, world, quantity, trigger_rate):
+        super().__init__(index, player, world, quantity)
         self.trigger_rate = trigger_rate
         self.last_trigger = 0
 
     def trigger(self):
-        # print("triggered " + self.description)
         pass
 
     def tick(self):
         self.last_trigger += 1
-        if self.last_trigger >= self.trigger_rate:
+        if self.last_trigger >= self.trigger_rate and self.quantity > 0:
             self.trigger()
             self.last_trigger = 0
 

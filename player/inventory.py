@@ -1,16 +1,13 @@
-from items.items import Items
-
-
 class Inventory:
-    def __init__(self, preferences):
-        # TODO: Need to prepare items on instantiation with preferences and players
-        self.items = [x.mutable_copy() for x in Items.GOODS.value] + [x.mutable_copy() for x in Items.INVESTMENTS.value]
+    def __init__(self, player, world, items):
+        self.items = [item(i, player, world, 0) for i, item in enumerate(items)]
+        self.lookup = {item.__name__: i for i, item in enumerate(items)}
 
-    def add_item(self, item, count):
-        self.items[item].add(count)
+    def get_item(self, target_class):
+        return self.items[self.lookup[target_class.__name__]]
 
-    def remove_item(self, item, count):
-        self.items[item].remove(min(self.items[item], count))
+    def get_index(self, target_class):
+        return self.lookup[target_class.__name__]
 
     def as_state(self):
         pass

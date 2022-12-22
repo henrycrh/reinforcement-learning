@@ -1,11 +1,11 @@
-from base import Item
+from items.base import Item
 
 
 # TODO: each good might need a default steepness and QoL amount
 # TODO: also each good needs basic condition metrics
 class Good(Item):
-    def __init__(self, quantity, player, preference):
-        super().__init__(quantity, player)
+    def __init__(self, index, player, world, quantity, preference):
+        super().__init__(index, player, world, quantity)
         self.preference = preference
 
     def use(self, quantity):
