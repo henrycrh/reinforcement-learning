@@ -1,10 +1,20 @@
+import copy
+
 class BaseItem:
     def __init__(self, index, description):
         self.index = index
         self.description = description
      
+    def __repr__(self):
+        return "Item(index={}, description={})".format(self.index, self.description)
+    
 class ImmutableItem(BaseItem):
-    pass
+    def __init__(self, index, description, item):
+        super().__init__(index, description)
+        self.item = item
+        
+    def get_item(self, **kwargs):
+        return self.item(self.index, self.description, **kwargs)
 
 class MutableItem(BaseItem):
 
@@ -13,6 +23,9 @@ class MutableItem(BaseItem):
         self.quantity = quantity
         self.player = player
         self.world = world
+        
+    def __repr__(self):
+        return "Item(index={}, description={}, quantity={})".format(self.index, self.description, self.quantity)
         
     def use(self, quantity):
         self.quantity -= quantity
@@ -51,9 +64,9 @@ class Investment(MutableItem):
     def trigger(self):
         print("triggered " + self.description)
     
-    def tick(self, player, world):
+    def tick(self):
         self.last_trigger += 1
-        if self.last_trigger >= self.trigger_rate:
+        if self.last_trigger >= self.trigger_rate and self.quantity > 0:
             self.trigger()
             self.last_trigger = 0  
             
@@ -63,6 +76,17 @@ class Investment(MutableItem):
             
     def as_state(self):
         return tuple(self.last_trigger)
+    
+class Apple(Good):
+    def __init__(self, index, description, quantity, player, world):
+        super().__init__(index, description, quantity, player, world, Preference(self, 10, 10))
+        
+class AppleTree(Investment):
+    def __init__(self, index, description, quantity, player, world):
+        super().__init__(index, description, quantity, player, world, 5)
+        
+    def trigger(self):
+        self.player.inventory.by_description("Apple").add(self.quantity)
     
 class Preference:
     def __init__(self, item, amount, steepness):
