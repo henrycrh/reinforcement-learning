@@ -1,0 +1,12 @@
+from listing import Listing
+from ..items.items import Items
+
+
+class Market:
+    def __init__(self, num_players):
+        self.items = Items.ITEMS.value
+        self.buy_listings = [[Listing(0, 0)] * len(self.items)] * num_players
+        self.sell_listings = [[Listing(float('inf'), 0)] * len(self.items)] * num_players
+
+    def as_state(self):
+        pass
