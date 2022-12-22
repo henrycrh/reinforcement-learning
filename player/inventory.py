@@ -1,15 +1,21 @@
-from ..item import Good, Investment
+import sys
+import os
+current = os.path.dirname(os.path.realpath(__file__))
+parent = os.path.dirname(current)
+sys.path.append(parent)
 
 class Inventory:
-    def __init__(self, items):
-        # TODO: items will store an Items object with properties like quantity in place of a singular count
-        self.items = [x.get_mutable() for x in range(len(items))]
+    def __init__(self, player, world, items):
+       self.items = [item.get_item(player=player, world=world, quantity=0) for item in items]
 
-    def add_good(self, item, count):
-        self.items[item] += count
+    def add_good(self, idx, count):
+        self.items[idx].add(count)
     
-    def remove_good(self, item, count):
-        self.items[item] -= min(self.items[item], count)
+    def remove_good(self, idx, count):
+        self.items[idx].remove(count)
+
+    def by_description(self, description):
+        return next((x for x in self.items if x.description.lower() == description.lower()), None)
 
     def as_state(self):
         pass
