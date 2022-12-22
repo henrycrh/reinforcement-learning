@@ -1,30 +1,21 @@
-import sys
-import os
-current = os.path.dirname(os.path.realpath(__file__))
-parent = os.path.dirname(current)
-sys.path.append(parent)
-
-
-from item import Good, Investment, Preference
-from market import Market, Listing
+from player.condition import Condition
 from player.inventory import Inventory
+
 
 class Player:
     def __init__(self, idx, world, items):
         self.idx = idx
         self.qol = 0
+        self.condition = Condition()
         self.wallet = 0
         self.inventory = Inventory(self, world, items)
+        self.world = world
 
     def __repr__(self):
-        return "Player(idx={}, qol={}, wallet={}, item_count={})".format(self.idx, self.qol, self.wallet, sum([x.quantity for x in self.inventory.items]))
+        return f'''Player(idx={self.idx},
+                          qol={self.qol},
+                          wall={self.wallet},
+                          item_count={sum([x.quantity for x in self.inventory.items])})'''
 
     def as_state(self):
         pass
-
-
-
-
-
-
-

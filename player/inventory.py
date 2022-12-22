@@ -1,21 +1,13 @@
-import sys
-import os
-current = os.path.dirname(os.path.realpath(__file__))
-parent = os.path.dirname(current)
-sys.path.append(parent)
-
 class Inventory:
     def __init__(self, player, world, items):
-       self.items = [item.get_item(player=player, world=world, quantity=0) for item in items]
+        self.items = [item(i, player, world, 0) for i, item in enumerate(items)]
+        self.lookup = {item.__name__: i for i, item in enumerate(items)}
 
-    def add_good(self, idx, count):
-        self.items[idx].add(count)
-    
-    def remove_good(self, idx, count):
-        self.items[idx].remove(count)
+    def get_item(self, target_class):
+        return self.items[self.lookup[target_class.__name__]]
 
-    def by_description(self, description):
-        return next((x for x in self.items if x.description.lower() == description.lower()), None)
+    def get_index(self, target_class):
+        return self.lookup[target_class.__name__]
 
     def as_state(self):
         pass
