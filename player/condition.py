@@ -11,7 +11,8 @@ class Condition:
         self.food = 100
 
     def tick(self):
-        pass
+        if self.get_condition() is not State.DEAD:
+            self.food -= 10
 
     def get_condition(self):
         if self.food <= 0:

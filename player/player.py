@@ -3,12 +3,13 @@ from player.inventory import Inventory
 
 
 class Player:
-    def __init__(self, idx, world, items):
+    def __init__(self, idx, world, items, policy_cls):
         self.idx = idx
         self.qol = 0
         self.condition = Condition()
         self.wallet = 0
         self.inventory = Inventory(self, world, items)
+        self.policy = policy_cls(self)
         self.world = world
 
     def __repr__(self):
