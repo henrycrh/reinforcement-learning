@@ -6,8 +6,8 @@ class Player:
     def __init__(self, idx, world, items, policy_cls):
         self.idx = idx
         self.qol = 0
-        self.condition = Condition()
         self.wallet = 0
+        self.condition = Condition()
         self.inventory = Inventory(self, world, items)
         self.policy = policy_cls(self)
         self.world = world
@@ -18,5 +18,9 @@ class Player:
                           wall={self.wallet},
                           item_count={sum([x.quantity for x in self.inventory.items])})'''
 
+    def tick(self):
+        self.condition.tick()
+        self.inventory.tick()
+
     def as_state(self):
-        pass
+        return [self.qol, self.wallet] + self.condition.as_state() + self.inventory.as_state()

@@ -19,3 +19,6 @@ class Condition:
             return State.DEAD
 
         return State.ALIVE
+
+    def as_state(self):
+        return [self.food]

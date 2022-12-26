@@ -8,11 +8,14 @@ class Good(Item):
         super().__init__(index, player, world, quantity)
         self.preference = preference
 
+    # TODO: return amount used?
     def use(self, quantity):
-        super().remove(quantity)
-        for i in range(quantity):
+        use_quantity = super().remove(quantity)
+        for i in range(use_quantity):
             self.player.qol += self.preference.get()
-            self.preference.last_use = 0
+
+        self.preference.last_use = 0
+        return use_quantity
 
     def tick(self):
         super().tick()

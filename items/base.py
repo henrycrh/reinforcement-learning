@@ -9,7 +9,9 @@ class Item:
         return f'{self.__class__.__name__}(index={self.index}, quantity={self.quantity})'
 
     def remove(self, quantity):
-        self.quantity -= min(self.quantity, quantity)
+        remove_quantity = min(self.quantity, quantity)
+        self.quantity -= remove_quantity
+        return remove_quantity
 
     def add(self, quantity):
         self.quantity += quantity

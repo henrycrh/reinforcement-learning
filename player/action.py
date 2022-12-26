@@ -1,6 +1,6 @@
 import numpy as np
 
-from ..market.listing import Listing
+from market.listing import Listing
 
 
 # TODO: when we're ready for hardcoded agent

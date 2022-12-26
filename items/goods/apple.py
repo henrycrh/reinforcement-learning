@@ -8,5 +8,6 @@ class Apple(Good):
         super().__init__(index, player, world, quantity, Preference(self, 10, 10))
 
     def use(self, quantity):
-        super().use(quantity)
-        self.player.condition.food += 2 * quantity
+        use_quantity = super().use(quantity)
+        self.player.condition.food += 2 * use_quantity
+        return use_quantity
